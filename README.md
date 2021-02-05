@@ -1,8 +1,8 @@
 # SwiftMarkdown
 
-A Swift wrapper for [python-markdown](https://github.com/Python-Markdown/markdown), using [PythonKit](https://github.com/pvieito/PythonKit).
+A Swift wrapper for [Python-Markdown](https://github.com/Python-Markdown/markdown), using [PythonKit](https://github.com/pvieito/PythonKit).
 
-You'll need to install python-markdown (and optionally pygments) yourself.
+You'll need to install Python-Markdown (and optionally pygments) yourself.
 
 ## Usage
 
