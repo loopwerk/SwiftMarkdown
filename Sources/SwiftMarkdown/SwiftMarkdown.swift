@@ -49,7 +49,10 @@ public struct SwiftMarkdown {
     case title = "Extensions:TitleExtension" // this is an extension offered by SwiftMarkdown
   }
 
-  public static func markdown(_ string: String, extensions: [Extension] = [], extensionConfig: [String: [String: String]] = [String: [String: String]]()) throws -> Markdown {
+  let parser: PythonObject
+  let extensions: [Extension]
+
+  public init(extensions: [Extension] = [], extensionConfig: [String: [String: String]] = [String: [String: String]]()) throws {
     // We take the path of the current file (SwiftMarkdown.swift),
     // and go up the path until we're in the folder where Extensions is
     let rootPath = URL(fileURLWithPath: #file)
@@ -64,20 +67,29 @@ public struct SwiftMarkdown {
 
     let markdown = try Python.attemptImport("markdown")
 
-    let md = markdown.Markdown.dynamicallyCall(withKeywordArguments: ["extensions": extensions.map(\.rawValue), "output_format": "html5", "extension_configs": extensionConfig])
-    let html = String(md.convert(string))
+    parser = markdown.Markdown.dynamicallyCall(withKeywordArguments: ["extensions": extensions.map(\.rawValue), "output_format": "html5", "extension_configs": extensionConfig])
+    self.extensions = extensions
+  }
+
+  public func markdown(_ string: String) -> Markdown {
+    let html = String(parser.convert(string))
 
     var title: String? = nil
     if extensions.contains(.title) {
-      title = String(md.Title)
+      title = String(parser.Title)
     }
 
     var metadata: [String: String] = [:]
     if extensions.contains(.meta) {
-      let tempMetadata: [String: [String]] = Dictionary(md.Meta) ?? [:]
+      let tempMetadata: [String: [String]] = Dictionary(parser.Meta) ?? [:]
       metadata = tempMetadata.mapValues { $0.joined(separator: ", ") }
     }
 
     return Markdown(html: html ?? "", title: title, metadata: metadata)
+  }
+
+  public static func markdown(_ string: String, extensions: [Extension] = [], extensionConfig: [String: [String: String]] = [String: [String: String]]()) throws -> Markdown {
+    let instance = try SwiftMarkdown(extensions: extensions, extensionConfig: extensionConfig)
+    return instance.markdown(string)
   }
 }

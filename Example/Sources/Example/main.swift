@@ -44,3 +44,9 @@ print("Hello World")
 """
 
 let result = try SwiftMarkdown.markdown(string2, extensions: [.fencedCode, .codehilite])
+
+// A parser can be reused
+let parser = try SwiftMarkdown(extensions: [.nl2br])
+print(parser.markdown(string2))
+print(parser.markdown(string2))
+print(parser.markdown(string2))
