@@ -32,6 +32,7 @@ SwiftMarkdown also comes bundles with its own two extensions:
 
 - `.title`, which removes the first title from the html output and instead makes it available as `result.title`
 - `.strikethrough`, which turns `~~text~~` into ~~text~~
+- `urlize`, which turns naked links into clickable links
 
 
 ## Installation
@@ -39,5 +40,5 @@ SwiftMarkdown also comes bundles with its own two extensions:
 Using Swift Package Manager
 
 ```
-.package(url: "https://github.com/loopwerk/SwiftMarkdown", from: "0.1.0"),
+.package(url: "https://github.com/loopwerk/SwiftMarkdown", from: "0.4.0"),
 ```

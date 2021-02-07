@@ -45,8 +45,9 @@ public struct SwiftMarkdown {
     case smarty = "smarty"
     case wikilinks = "wikilinks"
     case toc = "toc"
-    case strikethrough = "Extensions:StrikeThrough" // this is an extension offered by SwiftMarkdown
+    case strikethrough = "Extensions:StrikeThroughExtension" // this is an extension offered by SwiftMarkdown
     case title = "Extensions:TitleExtension" // this is an extension offered by SwiftMarkdown
+    case urlize = "Extensions:UrlizeExtension" // this is an extension offered by SwiftMarkdown
   }
 
   let parser: PythonObject

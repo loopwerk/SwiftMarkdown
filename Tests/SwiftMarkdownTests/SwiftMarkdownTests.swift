@@ -65,12 +65,19 @@ Hello
     XCTAssertEqual(result.title, "Title")
   }
 
+  func testUrlizeExtension() {
+    let string = "example.com"
+    let result = try! SwiftMarkdown.markdown(string, extensions: [.urlize])
+    XCTAssertEqual(result.html, "<p><a href=\"http://example.com\">example.com</a></p>")
+  }
+
   static var allTests = [
     ("testBasic", testBasic),
     ("testMetadata", testMetadata),
     ("testCodeHighlight", testCodeHighlight),
     ("testCodeHighlightDifferentClass", testCodeHighlightDifferentClass),
     ("testTitleAndStrikethroughExtensions", testTitleAndStrikethroughExtensions),
+    ("testUrlizeExtension", testUrlizeExtension),
   ]
 }
 
