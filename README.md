@@ -28,11 +28,11 @@ print(markdownWithMetadata.metadata) // ["tags": "news, swift", "date": "2021-02
 
 See https://python-markdown.github.io/extensions for documentation on the "extensions".
 
-SwiftMarkdown also comes bundles with its own two extensions:
+SwiftMarkdown also comes bundles with its own three extensions:
 
 - `.title`, which removes the first title from the html output and instead makes it available as `result.title`
 - `.strikethrough`, which turns `~~text~~` into ~~text~~
-- `urlize`, which turns naked links into clickable links
+- `.urlize`, which turns naked links into clickable links
 
 
 ## Installation
